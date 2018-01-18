@@ -1,11 +1,9 @@
-(function() {
+(function(angular) {
   'use strict';
 
-  var MODULE_NAME = 'linagora.esn.linshare';
-
-  angular.module(MODULE_NAME, [
+  angular.module('linagora.esn.linshare', [
     'ui.router',
     'op.dynamicDirective',
     'restangular'
   ]);
-})();
+})(angular);
