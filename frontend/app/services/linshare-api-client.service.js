@@ -5,9 +5,11 @@
     .factory('esnLinshareApiClient', esnLinshareApiClient);
 
   function esnLinshareApiClient($window, $q) {
+    var LinshareApiClient = $window.LinshareApiClient;
     var client = null;
 
     return {
+      NODE_TYPE: LinshareApiClient.NODE_TYPE,
       listWorkgroups: listWorkgroups,
       listNodes: listNodes,
       listDocuments: listDocuments,
@@ -59,7 +61,7 @@
 
     function getClient() {
       if (!client) {
-        client = new $window.LinshareApiClient.Client({
+        client = new LinshareApiClient.Client({
           baseUrl: 'https://files.linshare.local/linshare/webservice/rest',
           auth: {
             type: 'basic',
