@@ -10,11 +10,44 @@
 
     return {
       NODE_TYPE: LinshareApiClient.NODE_TYPE,
+      createDocument: createDocument,
       listWorkgroups: listWorkgroups,
       listNodes: listNodes,
       listDocuments: listDocuments,
       shareDocuments: shareDocuments
     };
+
+    /**
+     * Create a document (upload a file) in My space
+     * @param  {Object} data    - The data object contains:
+     *                            - file: file object to upload
+     *                            - fileSize: the file's size
+     * @param  {Object} options - (optinal) possible attributes are:
+     *                            - async (Boolean): enable async upload
+     *                            - onUploadProgress (Function): to track the upload progress
+     * @return {Promise}         - Resolve on success
+     */
+    function createDocument(data, options) {
+      var cancelFn = angular.noop;
+      var promise = getClient().then(function(client) {
+        var formData = new FormData();
+
+        formData.append('file', data.file);
+        formData.append('filesize', data.fileSize);
+
+        var promise = client.user.documents.create(formData, options);
+
+        cancelFn = promise.cancel;
+
+        return promise;
+      });
+
+      promise.cancel = function() {
+        cancelFn();
+      };
+
+      return promise;
+    }
 
     /**
      * List user workgroups
