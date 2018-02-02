@@ -6,3 +6,10 @@ angular.module('esn.background', [])
       return promise;
     };
   });
+angular.module('esn.file-browser', []);
+angular.module('esn.i18n', [])
+  .factory('esnI18nService', function() {
+    return {
+      translate: function(input) { return input; }
+    };
+  });
