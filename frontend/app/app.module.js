@@ -4,6 +4,7 @@
   angular.module('linagora.esn.linshare', [
     'ui.router',
     'op.dynamicDirective',
-    'restangular'
+    'restangular',
+    'esn.background'
   ]);
 })(angular);
