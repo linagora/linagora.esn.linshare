@@ -5,6 +5,8 @@
     'ui.router',
     'op.dynamicDirective',
     'restangular',
-    'esn.background'
+    'esn.background',
+    'esn.i18n',
+    'esn.file-browser'
   ]);
 })(angular);
