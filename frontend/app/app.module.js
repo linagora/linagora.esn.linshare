@@ -7,6 +7,7 @@
     'restangular',
     'esn.background',
     'esn.i18n',
-    'esn.file-browser'
+    'esn.file-browser',
+    'esn.module-registry'
   ]);
 })(angular);

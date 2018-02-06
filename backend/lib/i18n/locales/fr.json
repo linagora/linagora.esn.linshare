@@ -1,4 +1,8 @@
 {
   "Linshare": "Linshare",
-  "My space": "Mon space"
+  "My space": "Mon space",
+  "Backend": "Backend",
+  "Frontend": "Frontend",
+  "API base path": "Chemin de base de l'API",
+  "The base path would look like this": "Le chemin de base devrait ressembler à"
 }

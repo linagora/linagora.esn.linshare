@@ -9,11 +9,11 @@ const AWESOME_MODULE_NAME = 'linagora.esn.linshare';
 
 const myAwesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
   dependencies: [
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.esn-config', 'esn-config'),
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.i18n', 'i18n'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.logger', 'logger'),
-    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.wrapper', 'webserver-wrapper'),
-    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.db', 'db'),
     new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.middleware.authorization', 'authorizationMW'),
-    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.i18n', 'i18n')
+    new Dependency(Dependency.TYPE_NAME, 'linagora.esn.core.webserver.wrapper', 'webserver-wrapper')
   ],
 
   states: {
@@ -34,6 +34,8 @@ const myAwesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
     deploy: function(dependencies, callback) {
       // Register the webapp
       const app = require('./backend/webserver/application')(dependencies, this);
+
+      require('./backend/lib')(dependencies).init();
 
       // Register every exposed endpoints
       app.use('/api', this.api.module);
