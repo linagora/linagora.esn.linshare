@@ -4,7 +4,7 @@
   angular.module('linagora.esn.linshare')
     .factory('esnLinshareApiClient', esnLinshareApiClient);
 
-  function esnLinshareApiClient($window, $q) {
+  function esnLinshareApiClient($window, $q, esnConfig) {
     var LinshareApiClient = $window.LinshareApiClient;
     var client = null;
 
@@ -93,18 +93,25 @@
     }
 
     function getClient() {
-      if (!client) {
-        client = new LinshareApiClient.Client({
-          baseUrl: 'https://files.linshare.local/linshare/webservice/rest',
-          auth: {
-            type: 'basic',
-            username: 'root@localhost.localdomain',
-            password: 'adminlinshare'
-          }
-        });
+      if (client) {
+        return $q.when(client);
       }
 
-      return $q.when(client);
+      return esnConfig('linagora.esn.linshare.apiBasePathFrontend')
+        .then(function(apiBasePath) {
+          if (!apiBasePath) {
+            return $q.reject(new Error('Linshare API base path for frontend is not configured'));
+          }
+
+          return new LinshareApiClient.Client({
+            baseUrl: apiBasePath,
+            auth: {
+              type: 'basic',
+              username: 'root@localhost.localdomain',
+              password: 'adminlinshare'
+            }
+          });
+        });
     }
 
   }

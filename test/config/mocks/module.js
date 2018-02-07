@@ -1,5 +1,7 @@
 'use strict';
 
+/* global _: false */
+
 angular.module('esn.file-browser', []);
 angular.module('esn.module-registry', []);
 angular.module('esn.background', [])
@@ -14,3 +16,9 @@ angular.module('esn.i18n', [])
       translate: function(input) { return input; }
     };
   });
+angular.module('esn.configuration', [])
+  .factory('esnConfig', function() {
+    return function() {};
+  });
+angular.module('esn.lodash-wrapper', [])
+  .constant('_', _);
