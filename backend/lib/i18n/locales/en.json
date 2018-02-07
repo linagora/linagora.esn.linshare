@@ -1,4 +1,8 @@
 {
   "Linshare": "Linshare",
-  "My space": "My space"
+  "My space": "My space",
+  "Backend": "Backend",
+  "Frontend": "Frontend",
+  "API base path": "API base path",
+  "The base path would look like this": "The base path would look like this"
 }

@@ -1,10 +1,13 @@
 'use strict';
 
-module.exports = function(dependencies) {
+module.exports = dependencies => {
+  const config = require('./config')(dependencies);
 
-  const models = require('./db')(dependencies);
+  function init() {
+    config.init();
+  }
 
   return {
-    models
+    init
   };
 };

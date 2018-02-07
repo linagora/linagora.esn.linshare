@@ -1,4 +1,8 @@
 {
   "Linshare": "Linshare",
-  "My space": "My space"
+  "My space": "My space",
+  "Backend": "Backend",
+  "Frontend": "Frontend",
+  "API base path": "Đường dẫn API gốc",
+  "The base path would look like this": "Đường dẫn gốc có thể dùng định dạng sau"
 }
