@@ -5,9 +5,11 @@
     'ui.router',
     'op.dynamicDirective',
     'restangular',
+    'esn.configuration',
     'esn.background',
     'esn.i18n',
     'esn.file-browser',
-    'esn.module-registry'
+    'esn.module-registry',
+    'esn.lodash-wrapper'
   ]);
 })(angular);
