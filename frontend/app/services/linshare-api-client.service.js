@@ -10,7 +10,10 @@
 
     return {
       NODE_TYPE: LinshareApiClient.NODE_TYPE,
+      ASYNC_TASK_STATUS: LinshareApiClient.ASYNC_TASK_STATUS,
       createDocument: createDocument,
+      createDocumentFromUrl: createDocumentFromUrl,
+      getDocumentAsyncTaskById: getDocumentAsyncTaskById,
       listWorkgroups: listWorkgroups,
       listNodes: listNodes,
       listDocuments: listDocuments,
@@ -47,6 +50,33 @@
       };
 
       return promise;
+    }
+
+    /**
+     * Create a document (upload a file) in My space from URL
+     * @param  {Object} data    - A object:
+     *                            + url: url to the file
+     *                            + fileName: (optional) custom file name
+     *                            + size: (optional) the file size
+     * @param  {Object} options - Possible options are:
+     *                            + async: set true to upload asynchronously
+     * @return {Promise}        - Resolve on success
+     */
+    function createDocumentFromUrl(data, options) {
+      return getClient().then(function(client) {
+        return client.user.documents.createFromUrl(data, options);
+      });
+    }
+
+    /**
+     * Get async task when you create document asynchronously
+     * @param  {String} taskId - The async task ID
+     * @return {Promise}       - Resolve on success
+     */
+    function getDocumentAsyncTaskById(taskId) {
+      return getClient().then(function(client) {
+        return client.user.documents.getAsyncTask(taskId);
+      });
     }
 
     /**
@@ -103,7 +133,7 @@
             return $q.reject(new Error('Linshare API base path for frontend is not configured'));
           }
 
-          return new LinshareApiClient.Client({
+          client = new LinshareApiClient.Client({
             baseUrl: apiBasePath,
             auth: {
               type: 'basic',
@@ -111,6 +141,8 @@
               password: 'adminlinshare'
             }
           });
+
+          return client;
         });
     }
 
