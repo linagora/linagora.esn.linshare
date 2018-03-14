@@ -17,5 +17,9 @@
           platform: true
         }
       }
-    });
+    })
+
+    // we choose 4 minutes because of Linshare 5 minutes limit
+    // and we think it is acceptable to spend some time for round trip time (1 minute for now)
+    .constant('LINSHARE_JWT_TOKEN_CACHE_TIMEOUT', 240);
 })(angular);

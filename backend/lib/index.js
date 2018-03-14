@@ -1,5 +1,7 @@
 'use strict';
 
+const constants = require('./constants');
+
 module.exports = dependencies => {
   const config = require('./config')(dependencies);
 
@@ -8,6 +10,7 @@ module.exports = dependencies => {
   }
 
   return {
-    init
+    init,
+    constants
   };
 };
