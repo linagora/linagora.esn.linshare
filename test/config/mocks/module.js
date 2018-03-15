@@ -22,3 +22,14 @@ angular.module('esn.configuration', [])
   });
 angular.module('esn.lodash-wrapper', [])
   .constant('_', _);
+angular.module('esn.http', [])
+  .factory('httpErrorHandler', function() {
+    return {
+      redirectToLogin: angular.noop
+    };
+  });
+
+angular.module('esn.cache', [])
+  .factory('Cache', function() {
+    return angular.noop;
+  });

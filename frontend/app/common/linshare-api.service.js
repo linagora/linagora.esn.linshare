@@ -1,0 +1,20 @@
+(function(angular) {
+  'use strict';
+
+  angular.module('linagora.esn.linshare')
+    .factory('linshareApiService', linshareApiService);
+
+  function linshareApiService(linshareRestangular) {
+    return {
+      generateJwtToken: generateJwtToken
+    };
+
+    /**
+     * Generate JWT token to authenticate against Linshare APIs
+     * @return {Promise}          - On success, resolves with the response containing the token
+     */
+    function generateJwtToken() {
+      return linshareRestangular.one('token').post();
+    }
+  }
+})(angular);
