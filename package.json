@@ -1,7 +1,7 @@
 {
   "name": "linagora.esn.linshare",
   "version": "0.0.1",
-  "description": "OpenPaas module for Linshare",
+  "description": "OpenPaas module for LinShare",
   "main": "index.js",
   "devDependencies": {
     "@linagora/grunt-i18n-checker": "2.0.5",

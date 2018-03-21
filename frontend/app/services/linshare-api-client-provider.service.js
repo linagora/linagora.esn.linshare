@@ -38,7 +38,7 @@
       return esnConfig('linagora.esn.linshare.apiBasePathFrontend')
         .then(function(apiBasePath) {
           if (!apiBasePath) {
-            return $q.reject(new Error('Linshare API base path for frontend is not configured'));
+            return $q.reject(new Error('LinShare API base path for frontend is not configured'));
           }
 
           return new LinshareApiClient.Client({

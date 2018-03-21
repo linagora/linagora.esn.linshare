@@ -40,7 +40,7 @@ describe('The linshareApiClientProvider service', function() {
       esnConfigMock.returns($q.when());
 
       linshareApiClientProvider.get().catch(function(err) {
-        expect(err.message).to.equal('Linshare API base path for frontend is not configured');
+        expect(err.message).to.equal('LinShare API base path for frontend is not configured');
         done();
       });
 
