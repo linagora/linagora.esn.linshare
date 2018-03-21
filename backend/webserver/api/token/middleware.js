@@ -7,6 +7,6 @@ module.exports = function() {
 };
 
 function canGenerateToken(req, res, next) {
-  // everyone can use Linshare
+  // everyone can use LinShare
   next();
 }

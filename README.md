@@ -1,3 +1,3 @@
 # linagora.esn.linshare
 
-> OpenPaaS Module for Linshare
+> OpenPaaS Module for LinShare

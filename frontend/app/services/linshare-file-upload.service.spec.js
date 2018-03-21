@@ -19,7 +19,7 @@ describe('The linshareFileUpload service', function() {
   }));
 
   describe('The uploadFile fn', function() {
-    it('should call Linshare API to create document in My space', function() {
+    it('should call LinShare API to create document in My space', function() {
       esnLinshareApiClient.createDocument = sinon.stub().returns($q.when({}));
 
       var file = { name: 'Learn_JS_in_6_hours.pdf' };

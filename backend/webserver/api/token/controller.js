@@ -26,13 +26,13 @@ function generateJwtToken(req, res) {
 
   authJwt.generateWebToken(payload, { expiresIn: JWT_TOKEN_TIMEOUT }, (err, token) => {
     if (err || !token) {
-      logger.error('Error while generating JWT token for Linshare', err);
+      logger.error('Error while generating JWT token for LinShare', err);
 
       return res.status(500).json({
         error: {
           code: 500,
           message: 'Server Error',
-          details: 'Error while generating JWT token for Linshare'
+          details: 'Error while generating JWT token for LinShare'
         }
       });
     }

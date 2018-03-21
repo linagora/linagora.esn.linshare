@@ -10,7 +10,7 @@
     };
 
     /**
-     * Generate JWT token to authenticate against Linshare APIs
+     * Generate JWT token to authenticate against LinShare APIs
      * @return {Promise}          - On success, resolves with the response containing the token
      */
     function generateJwtToken() {
