@@ -6,7 +6,7 @@
 var expect = chai.expect;
 
 describe('The linshareApiClient service', function() {
-  var $rootScope, $q, linshareApiClientProvider, esnLinshareApiClient, esnConfigMock;
+  var $rootScope, $q, linshareApiClientProvider, linshareApiClient, esnConfigMock;
 
   beforeEach(module('linagora.esn.linshare', function($provide) {
     $provide.value('esnConfig', function() {
@@ -14,17 +14,17 @@ describe('The linshareApiClient service', function() {
     });
   }));
 
-  beforeEach(inject(function(_$rootScope_, _$q_, _linshareApiClientProvider_, _esnLinshareApiClient_) {
+  beforeEach(inject(function(_$rootScope_, _$q_, _linshareApiClientProvider_, _linshareApiClient_) {
     $rootScope = _$rootScope_;
     $q = _$q_;
     linshareApiClientProvider = _linshareApiClientProvider_;
-    esnLinshareApiClient = _esnLinshareApiClient_;
+    linshareApiClient = _linshareApiClient_;
   }));
 
   describe('The createDocument fn', function() {
     it('should reject if it cannot get client instance from provider', function(done) {
       linshareApiClientProvider.get = sinon.stub().returns($q.reject(new Error('an_error')));
-      esnLinshareApiClient.createDocument()
+      linshareApiClient.createDocument()
         .catch(function(error) {
           expect(error.message).to.equal('an_error');
           done();
@@ -43,7 +43,7 @@ describe('The linshareApiClient service', function() {
       };
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
-      esnLinshareApiClient.createDocument({
+      linshareApiClient.createDocument({
         file: { name: 'my file' },
         fileSize: 100
       });
@@ -67,7 +67,7 @@ describe('The linshareApiClient service', function() {
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
 
-      var uploadPromise = esnLinshareApiClient.createDocument({
+      var uploadPromise = linshareApiClient.createDocument({
         file: { name: 'my file' },
         fileSize: 100
       });
@@ -83,7 +83,7 @@ describe('The linshareApiClient service', function() {
   describe('The createDocumentFromUrl fn', function() {
     it('should reject if it cannot get client instance from provider', function(done) {
       linshareApiClientProvider.get = sinon.stub().returns($q.reject(new Error('an_error')));
-      esnLinshareApiClient.createDocumentFromUrl()
+      linshareApiClient.createDocumentFromUrl()
         .catch(function(error) {
           expect(error.message).to.equal('an_error');
           done();
@@ -104,7 +104,7 @@ describe('The linshareApiClient service', function() {
       var options = { async: true };
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
-      esnLinshareApiClient.createDocumentFromUrl(data, options);
+      linshareApiClient.createDocumentFromUrl(data, options);
 
       $rootScope.$digest();
 
@@ -115,7 +115,7 @@ describe('The linshareApiClient service', function() {
   describe('The getDocumentAsyncTaskById fn', function() {
     it('should reject if it cannot get client instance from provider', function(done) {
       linshareApiClientProvider.get = sinon.stub().returns($q.reject(new Error('an_error')));
-      esnLinshareApiClient.getDocumentAsyncTaskById()
+      linshareApiClient.getDocumentAsyncTaskById()
         .catch(function(error) {
           expect(error.message).to.equal('an_error');
           done();
@@ -135,7 +135,7 @@ describe('The linshareApiClient service', function() {
       var asyncTaskId = '123';
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
-      esnLinshareApiClient.getDocumentAsyncTaskById(asyncTaskId);
+      linshareApiClient.getDocumentAsyncTaskById(asyncTaskId);
 
       $rootScope.$digest();
 
@@ -146,7 +146,7 @@ describe('The linshareApiClient service', function() {
   describe('The listWorkgroups fn', function() {
     it('should reject if it cannot get client instance from provider', function(done) {
       linshareApiClientProvider.get = sinon.stub().returns($q.reject(new Error('an_error')));
-      esnLinshareApiClient.listWorkgroups()
+      linshareApiClient.listWorkgroups()
         .catch(function(error) {
           expect(error.message).to.equal('an_error');
           done();
@@ -165,7 +165,7 @@ describe('The linshareApiClient service', function() {
       };
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
-      esnLinshareApiClient.listWorkgroups();
+      linshareApiClient.listWorkgroups();
 
       $rootScope.$digest();
 
@@ -176,7 +176,7 @@ describe('The linshareApiClient service', function() {
   describe('The listNodes fn', function() {
     it('should reject if it cannot get client instance from provider', function(done) {
       linshareApiClientProvider.get = sinon.stub().returns($q.reject(new Error('an_error')));
-      esnLinshareApiClient.listNodes()
+      linshareApiClient.listNodes()
         .catch(function(error) {
           expect(error.message).to.equal('an_error');
           done();
@@ -195,7 +195,7 @@ describe('The linshareApiClient service', function() {
       };
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
-      esnLinshareApiClient.listNodes();
+      linshareApiClient.listNodes();
 
       $rootScope.$digest();
 
@@ -206,7 +206,7 @@ describe('The linshareApiClient service', function() {
   describe('The listDocuments fn', function() {
     it('should reject if it cannot get client instance from provider', function(done) {
       linshareApiClientProvider.get = sinon.stub().returns($q.reject(new Error('an_error')));
-      esnLinshareApiClient.listDocuments()
+      linshareApiClient.listDocuments()
         .catch(function(error) {
           expect(error.message).to.equal('an_error');
           done();
@@ -225,7 +225,7 @@ describe('The linshareApiClient service', function() {
       };
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
-      esnLinshareApiClient.listDocuments();
+      linshareApiClient.listDocuments();
 
       $rootScope.$digest();
 
@@ -236,7 +236,7 @@ describe('The linshareApiClient service', function() {
   describe('The shareDocuments fn', function() {
     it('should reject if it cannot get client instance from provider', function(done) {
       linshareApiClientProvider.get = sinon.stub().returns($q.reject(new Error('an_error')));
-      esnLinshareApiClient.shareDocuments()
+      linshareApiClient.shareDocuments()
         .catch(function(error) {
           expect(error.message).to.equal('an_error');
           done();
@@ -255,7 +255,7 @@ describe('The linshareApiClient service', function() {
       };
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
-      esnLinshareApiClient.shareDocuments();
+      linshareApiClient.shareDocuments();
 
       $rootScope.$digest();
 
