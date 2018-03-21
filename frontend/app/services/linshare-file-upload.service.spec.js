@@ -6,21 +6,21 @@
 var expect = chai.expect;
 
 describe('The linshareFileUpload service', function() {
-  var $q, $rootScope, esnLinshareApiClient;
+  var $q, $rootScope, linshareApiClient;
   var linshareFileUpload;
 
   beforeEach(module('linagora.esn.linshare'));
 
-  beforeEach(inject(function(_$rootScope_, _$q_, _esnLinshareApiClient_, _linshareFileUpload_) {
+  beforeEach(inject(function(_$rootScope_, _$q_, _linshareApiClient_, _linshareFileUpload_) {
     $rootScope = _$rootScope_;
     $q = _$q_;
-    esnLinshareApiClient = _esnLinshareApiClient_;
+    linshareApiClient = _linshareApiClient_;
     linshareFileUpload = _linshareFileUpload_;
   }));
 
   describe('The uploadFile fn', function() {
     it('should call LinShare API to create document in My space', function() {
-      esnLinshareApiClient.createDocument = sinon.stub().returns($q.when({}));
+      linshareApiClient.createDocument = sinon.stub().returns($q.when({}));
 
       var file = { name: 'Learn_JS_in_6_hours.pdf' };
       var size = 12345;
@@ -28,7 +28,7 @@ describe('The linshareFileUpload service', function() {
 
       linshareFileUpload.uploadFile(null, file, fileType, size);
 
-      expect(esnLinshareApiClient.createDocument).to.have.been.calledWith({
+      expect(linshareApiClient.createDocument).to.have.been.calledWith({
         file: file,
         fileSize: size
       });
@@ -37,7 +37,7 @@ describe('The linshareFileUpload service', function() {
     it('should support upload progress by promise notification', function() {
       var onUploadProgress;
 
-      esnLinshareApiClient.createDocument = function(data, option) {
+      linshareApiClient.createDocument = function(data, option) {
         onUploadProgress = option.onUploadProgress;
 
         return $q.when();
@@ -63,7 +63,7 @@ describe('The linshareFileUpload service', function() {
 
       promise.cancel = sinon.spy();
 
-      esnLinshareApiClient.createDocument = sinon.stub().returns(promise);
+      linshareApiClient.createDocument = sinon.stub().returns(promise);
 
       var file = { name: 'Learn_JS_in_6_hours.pdf' };
       var size = 12345;

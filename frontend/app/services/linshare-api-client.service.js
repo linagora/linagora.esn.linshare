@@ -2,9 +2,9 @@
   'use strict';
 
   angular.module('linagora.esn.linshare')
-    .factory('esnLinshareApiClient', esnLinshareApiClient);
+    .factory('linshareApiClient', linshareApiClient);
 
-  function esnLinshareApiClient(LinshareApiClient, linshareApiClientProvider) {
+  function linshareApiClient(LinshareApiClient, linshareApiClientProvider) {
     return {
       NODE_TYPE: LinshareApiClient.NODE_TYPE,
       ASYNC_TASK_STATUS: LinshareApiClient.ASYNC_TASK_STATUS,

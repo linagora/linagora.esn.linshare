@@ -7,7 +7,7 @@
   function linshareFileUpload(
     $q,
     inBackground,
-    esnLinshareApiClient
+    linshareApiClient
   ) {
     return {
       uploadFile: uploadFile
@@ -16,7 +16,7 @@
     function uploadFile(unusedUrl, file, type, size, options, canceler) {
       var deferred = $q.defer();
 
-      var uploadPromise = esnLinshareApiClient.createDocument({
+      var uploadPromise = linshareApiClient.createDocument({
         file: file,
         fileSize: size
       }, {

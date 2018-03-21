@@ -5,10 +5,10 @@
 var expect = chai.expect;
 
 describe('The linshareFileBrowserLoaders service', function() {
-  var $rootScope, linshareFileBrowserLoaders, esnLinshareApiClient;
+  var $rootScope, linshareFileBrowserLoaders, linshareApiClient;
 
   beforeEach(function() {
-    esnLinshareApiClient = {
+    linshareApiClient = {
       listDocuments: sinon.stub()
     };
   });
@@ -16,7 +16,7 @@ describe('The linshareFileBrowserLoaders service', function() {
   beforeEach(function() {
     module('linagora.esn.linshare');
     module(function($provide) {
-      $provide.value('esnLinshareApiClient', esnLinshareApiClient);
+      $provide.value('linshareApiClient', linshareApiClient);
     });
   });
 
@@ -28,13 +28,13 @@ describe('The linshareFileBrowserLoaders service', function() {
   });
 
   describe('The loadMySpace function', function() {
-    it('should call esnLinshareApiClient.listDocuments and process the documents', function(done) {
+    it('should call linshareApiClient.listDocuments and process the documents', function(done) {
       var docs = [
         { name: 'doc1' },
         { name: 'doc2' }
       ];
 
-      esnLinshareApiClient.listDocuments.returns($q.when(docs));
+      linshareApiClient.listDocuments.returns($q.when(docs));
 
       linshareFileBrowserLoaders.loadMySpace()
         .then(function(results) {
