@@ -262,4 +262,36 @@ describe('The linshareApiClient service', function() {
       expect(client.user.shares.shareDocuments).to.have.been.calledWith();
     });
   });
+
+  describe('The downloadDocument fn', function() {
+    it('should reject if it cannot get client instance from provider', function(done) {
+      linshareApiClientProvider.get = sinon.stub().returns($q.reject(new Error('an_error')));
+      linshareApiClient.downloadDocument()
+        .catch(function(error) {
+          expect(error.message).to.equal('an_error');
+          done();
+        });
+
+      $rootScope.$digest();
+    });
+
+    it('should download the document', function() {
+      var client = {
+        user: {
+          workgroup: {
+            downloadDocument: sinon.spy()
+          }
+        }
+      };
+      var workGroupUuid = 'toto';
+      var documentUuid = 'tata';
+
+      linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
+      linshareApiClient.downloadDocument(workGroupUuid, documentUuid);
+
+      $rootScope.$digest();
+
+      expect(client.user.workgroup.downloadDocument).to.have.been.calledWith(workGroupUuid, documentUuid);
+    });
+  });
 });
