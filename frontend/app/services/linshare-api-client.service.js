@@ -14,7 +14,8 @@
       listWorkgroups: listWorkgroups,
       listNodes: listNodes,
       listDocuments: listDocuments,
-      shareDocuments: shareDocuments
+      shareDocuments: shareDocuments,
+      downloadDocument: downloadDocument
     };
 
     /**
@@ -116,6 +117,18 @@
     function shareDocuments(options) {
       return getClient().then(function(client) {
         return client.user.shares.shareDocuments(options);
+      });
+    }
+
+    /**
+     * Download a document in a workgroup
+     * @param  {String} workGroupUuid - The workgoup UUID where the node is in
+     * @param  {String} documentUUid  - The document UUID
+     * @return {Promise}              - Resolve with the Blob object of the file
+     */
+    function downloadDocument(workGroupUuid, documentUUid) {
+      return getClient().then(function(client) {
+        return client.user.workgroup.downloadDocument(workGroupUuid, documentUUid);
       });
     }
 
