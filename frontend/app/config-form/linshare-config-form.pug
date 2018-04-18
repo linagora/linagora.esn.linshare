@@ -1,4 +1,9 @@
 ng-form(name='form')
+  h5 #{__('Instance URL')}
+  .configuration-form
+    .backend-url-input
+      esn-form-group(label=__('Instance URL'))
+        input.form-control(type="url", ng-model="$ctrl.configurations.instanceURL.value", name="instanceURL", required)
   h5 #{__('API base path')}
   .helper
     span #{__('The base path would look like this')}
