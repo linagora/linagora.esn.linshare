@@ -8,6 +8,7 @@
     return {
       NODE_TYPE: LinshareApiClient.NODE_TYPE,
       ASYNC_TASK_STATUS: LinshareApiClient.ASYNC_TASK_STATUS,
+      getDocument: getDocument,
       createDocument: createDocument,
       createDocumentFromUrl: createDocumentFromUrl,
       getDocumentAsyncTaskById: getDocumentAsyncTaskById,
@@ -17,6 +18,17 @@
       shareDocuments: shareDocuments,
       downloadDocument: downloadDocument
     };
+
+    /**
+     * Get document by document id
+     * @param  {String} documentId    - The document id
+     * @return {Promise}              - Resolve document on success
+     */
+    function getDocument(documentId) {
+      return getClient().then(function(client) {
+        return client.user.documents.get(documentId);
+      });
+    }
 
     /**
      * Create a document (upload a file) in My space
