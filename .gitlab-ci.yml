@@ -1,6 +1,7 @@
 stages:
   - test
   - deploy_dev
+  - release
 
 test:
   stage: test
@@ -16,6 +17,11 @@ test:
     - npm i
     - bower i --allow-root
     - grunt --chunk=1 --ci
+  except:
+    variables:
+      - $SKIP_TESTS
+    refs:
+      - tags@linagora/lgs/openpaas/linagora.esn.linshare
 
 .deploy_dev:
   stage: deploy_dev
@@ -26,7 +32,7 @@ test:
     name: dev
     url: https://dev.open-paas.org
   only:
-    - master
+    - master@linagora/lgs/openpaas/linagora.esn.linshare
   script:
     - cd /srv/${CI_PROJECT_NAME}
     - git fetch --all
@@ -38,3 +44,20 @@ test:
     - bower prune
     - git checkout -- .
     - sudo /etc/init.d/rse.dev restart
+
+npm-release:
+  stage: release
+  image: node:8
+  tags:
+    - docker
+  only:
+    - tags@linagora/lgs/openpaas/linagora.esn.linshare
+  except:
+    variables:
+      - $SKIP_RELEASE
+  script:
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
+    - npm i --production
+    - npm i -g bower
+    - bower i --allow-root --production
+    - npm publish
