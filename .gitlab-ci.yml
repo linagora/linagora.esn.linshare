@@ -57,7 +57,4 @@ npm-release:
       - $SKIP_RELEASE
   script:
     - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
-    - npm i --production
-    - npm i -g bower
-    - bower i --allow-root --production
     - npm publish
