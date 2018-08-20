@@ -1,11 +1,11 @@
 {
   "name": "linagora.esn.linshare",
   "main": "index.js",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "authors": [
     "Linagora Folks <openpaas@linagora.com>"
   ],
-  "description": "OpenPaaS generic module template",
+  "description": "OpenPaas module for LinShare",
   "keywords": [
     "safe",
     "openpaas",
