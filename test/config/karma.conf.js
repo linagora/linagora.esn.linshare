@@ -16,7 +16,7 @@ module.exports = function(config) {
       'frontend/components/lodash/dist/lodash.min.js',
       'frontend/components/linshare-api-client/dist/linshare-api-client.min.js',
       'frontend/components/sinon-chai/lib/sinon-chai.js',
-      'frontend/components/sinon-1.15.4/index.js',
+      'node_modules/sinon/pkg/sinon.js',
       'test/config/mocks/**/*.js',
       'frontend/app/**/*.module.js',
       'frontend/app/**/*.js',
