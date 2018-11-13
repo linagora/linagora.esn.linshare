@@ -74,7 +74,9 @@
      */
     function createDocumentFromUrl(data, options) {
       return getClient().then(function(client) {
-        return client.user.documents.createFromUrl(data, options);
+        return listWorkgroups().then(function(work_groups) {
+          return client.user.workgroup.createInWorkgroupNodeFromUrl(data, options, work_groups[0].uuid);
+        });
       });
     }
 

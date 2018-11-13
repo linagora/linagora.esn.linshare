@@ -95,20 +95,33 @@ describe('The linshareApiClient service', function() {
     it('should create document from URL', function() {
       var client = {
         user: {
-          documents: {
-            createFromUrl: sinon.spy()
+          workgroup: {
+            list: function() {
+              return $q.when(
+                [
+                  {
+                    uuid: 'cd7702c4a45',
+                    creationDate: 1541695760357,
+                    name: 'Nouveau groupe de travail'
+                  }
+                ]
+              );
+            },
+            createInWorkgroupNodeFromUrl: sinon.spy()
           }
         }
       };
+
       var data = { url: '123' };
       var options = { async: true };
+      var uuid = 'cd7702c4a45';
 
       linshareApiClientProvider.get = sinon.stub().returns($q.when(client));
       linshareApiClient.createDocumentFromUrl(data, options);
 
       $rootScope.$digest();
 
-      expect(client.user.documents.createFromUrl).to.have.been.calledWith(data, options);
+      expect(client.user.workgroup.createInWorkgroupNodeFromUrl).to.have.been.calledWith(data, options, uuid);
     });
   });
 
