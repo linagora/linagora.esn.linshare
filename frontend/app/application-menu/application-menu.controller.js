@@ -4,14 +4,12 @@
   angular.module('linagora.esn.linshare')
     .controller('linshareApplicationMenuController', linshareApplicationMenuController);
 
-  function linshareApplicationMenuController(esnConfig, LINSHARE_MODULE_METADATA) {
+  function linshareApplicationMenuController(esnConfig) {
     var self = this;
 
     return esnConfig('linagora.esn.linshare.instanceURL')
       .then(function(instanceURL) {
         self.linshareInstanceUrl = instanceURL;
-        self.appTitle = LINSHARE_MODULE_METADATA.title;
-        self.icon = LINSHARE_MODULE_METADATA.icon;
       });
   }
 })();

@@ -9,6 +9,7 @@
       id: 'linagora.esn.linshare',
       title: 'LinShare',
       icon: '/linagora.esn.linshare/images/linshare-icon.svg',
+      disableable: true,
       config: {
         template: 'linshare-config-form',
         displayIn: {
