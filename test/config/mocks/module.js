@@ -28,7 +28,10 @@ angular.module('esn.http', [])
       redirectToLogin: angular.noop
     };
   });
-
+angular.module('esn.module-registry', [])
+  .factory('esnModuleRegistry', function() {
+    return {};
+  });
 angular.module('esn.cache', [])
   .factory('Cache', function() {
     return angular.noop;
