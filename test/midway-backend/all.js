@@ -1,7 +1,3 @@
-'use strict';
-
-/* eslint-disable no-console, no-process-env */
-
 const chai = require('chai');
 const path = require('path');
 const testConfig = require('../config/servers-conf');
@@ -45,11 +41,34 @@ before(function(done) {
   const nodeModulesPath = path.normalize(
     path.join(__dirname, '../../node_modules/')
   );
-  const nodeModulesLoader = manager.loaders.filesystem(nodeModulesPath, true);
   const loader = manager.loaders.code(require('../../index.js'), true);
+  const nodeModulesLoader = manager.loaders.filesystem(nodeModulesPath, true);
 
-  manager.appendLoader(nodeModulesLoader);
   manager.appendLoader(loader);
+  manager.appendLoader(nodeModulesLoader);
 
   loader.load(MODULE_NAME, done);
+});
+
+before(function(done) {
+  const self = this;
+
+  self.helpers.modules.initMidway(MODULE_NAME, err => {
+    if (err) {
+      return done(err);
+    }
+    const expressApp = require(self.testEnv.backendPath + '/webserver/application')(self.helpers.modules.current.deps);
+    const api = require(self.testEnv.backendPath + '/webserver/api')(self.helpers.modules.current.deps, self.helpers.modules.current.lib.lib);
+
+    expressApp.use(require('body-parser').json());
+    expressApp.use('/api', api);
+
+    self.helpers.modules.current.app = self.helpers.modules.getWebServer(expressApp);
+
+    done();
+  });
+});
+
+afterEach(function(done) {
+  this.helpers.mongo.dropDatabase(err => done(err));
 });
