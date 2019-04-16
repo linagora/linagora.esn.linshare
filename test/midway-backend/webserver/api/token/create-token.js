@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 'use strict';
 
 const request = require('supertest');
@@ -11,6 +13,8 @@ describe('The create token API: POST /token', () => {
 
   beforeEach(function(done) {
     this.helpers.modules.initMidway(MODULE_NAME, err => {
+      console.log('°°°', self.helpers.modules.current.deps);
+      console.log('°°°', JSON.stringify(self.helpers.modules.current.deps));
       expect(err).to.not.exist;
       const application = require(this.testEnv.backendPath + '/webserver/application')(this.helpers.modules.current.deps);
       const api = require(this.testEnv.backendPath + '/webserver/api')(this.helpers.modules.current.deps, this.helpers.modules.current.lib.lib);
