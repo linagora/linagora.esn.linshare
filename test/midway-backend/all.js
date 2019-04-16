@@ -68,3 +68,7 @@ before(function(done) {
     done();
   });
 });
+
+  afterEach(function(done) {
+    this.helpers.mongo.dropDatabase(err => done(err));
+  });

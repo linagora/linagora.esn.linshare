@@ -29,13 +29,6 @@ describe('The create token API: POST /token', () => {
     this.helpers.jwt.saveTestConfiguration(done);
   });
 
-  afterEach(function(done) {
-    this.helpers.mongo.dropDatabase(err => {
-      if (err) return done(err);
-      this.testEnv.core.db.mongo.mongoose.connection.close(done);
-    });
-  });
-
   it('should respond 401 if not logged in', function(done) {
     this.helpers.api.requireLogin(app, 'post', '/api/token', done);
   });
