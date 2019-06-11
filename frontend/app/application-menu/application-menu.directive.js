@@ -16,7 +16,7 @@
         { url: LINSHARE_MODULE_METADATA.icon },
         LINSHARE_MODULE_METADATA.title,
         'core.modules.linagora.esn.linshare.enabled',
-        false
+        LINSHARE_MODULE_METADATA.isDisplayedByDefault
       )
     };
 
