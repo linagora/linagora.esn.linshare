@@ -1,6 +1,6 @@
 {
   "name": "linagora.esn.linshare",
-  "version": "1.4.9-dev",
+  "version": "1.4.9",
   "description": "OpenPaas module for LinShare",
   "main": "index.js",
   "devDependencies": {
