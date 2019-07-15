@@ -3,6 +3,7 @@
 const AwesomeModule = require('awesome-module');
 const Dependency = AwesomeModule.AwesomeModuleDependency;
 const path = require('path');
+const cors = require('cors');
 const glob = require('glob-all');
 const FRONTEND_JS_PATH = __dirname + '/frontend/app/';
 const AWESOME_MODULE_NAME = 'linagora.esn.linshare';
@@ -39,7 +40,7 @@ const myAwesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
 
       require('./backend/lib')(dependencies).init();
 
-      // Register every exposed endpoints
+      app.all('/api/*', cors({ origin: true, credentials: true }));
       app.use('/api', this.api.module);
 
       const webserverWrapper = dependencies('webserver-wrapper');
