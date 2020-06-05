@@ -6,6 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const glob = require('glob-all');
 const FRONTEND_JS_PATH = __dirname + '/frontend/app/';
+const FRONTEND_JS_PATH_BUILD = __dirname + '/dist/';
 const AWESOME_MODULE_NAME = 'linagora.esn.linshare';
 
 const myAwesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
@@ -46,13 +47,23 @@ const myAwesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
       const webserverWrapper = dependencies('webserver-wrapper');
 
       // Register every exposed frontend scripts
-      const frontendJsFilesFullPath = glob.sync([
-        FRONTEND_JS_PATH + '**/*.module.js',
-        FRONTEND_JS_PATH + '**/!(*spec).js'
-      ]);
-      const frontendJsFilesUri = frontendJsFilesFullPath.map(function(filepath) {
-        return filepath.replace(FRONTEND_JS_PATH, '');
-      });
+      let frontendJsFilesFullPath, frontendJsFilesUri;
+
+      if (process.env.NODE_ENV !== 'production') {
+        frontendJsFilesFullPath = glob.sync([
+          FRONTEND_JS_PATH + '**/*.module.js',
+          FRONTEND_JS_PATH + '**/!(*spec).js'
+        ]);
+
+        frontendJsFilesUri = frontendJsFilesFullPath.map(filepath => filepath.replace(FRONTEND_JS_PATH, ''));
+      } else {
+        frontendJsFilesFullPath = glob.sync([
+          FRONTEND_JS_PATH_BUILD + '*.js'
+        ]);
+
+        frontendJsFilesUri = frontendJsFilesFullPath.map(filepath => filepath.replace(FRONTEND_JS_PATH_BUILD, ''));
+      }
+
       const lessFile = path.join(FRONTEND_JS_PATH, 'app.less');
       const jsResourceFiles = [
         '../components/linshare-api-client/dist/linshare-api-client.min.js'
